@@ -13,7 +13,7 @@ normalPost = null;
 var confirmSubmit = function() {
     var isPublic = $('#entire_group').is(':checked');
     var text = tinyMCE.get("rich_old_new_post").getContent().toLowerCase();
-    var saysPrivate = (text.indexOf("private") > -1 || text.indexOf("public") > -1 || text.indexOf("grade") > -1 || test.indexOf("deduction") > -1);
+    var saysPrivate = (text.indexOf("private") > -1 || text.indexOf("public") > -1 || text.indexOf("grade") > -1 || text.indexOf("deduction") > -1);
     if (isPublic && saysPrivate) {
         if (window.confirm("Your post may mention grade-related information, but is currently public.  Are you sure you want to post?")) {
             $('#post_button').off('click');
