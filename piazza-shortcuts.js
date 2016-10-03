@@ -6,6 +6,8 @@
 // @author       Arka
 // @match        https://piazza.com/class/*
 // @grant        none
+// @updateURL    https://raw.githubusercontent.com/Arkaaito/piazza-js/master/piazza-shortcuts.js
+// @downloadURL  https://raw.githubusercontent.com/Arkaaito/piazza-js/master/piazza-shortcuts.js
 // ==/UserScript==
 
 function debox() {
