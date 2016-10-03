@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Piazza Shortcuts
 // @namespace    http://scion-interactive.com/
-// @version      0.2
+// @version      0.3
 // @description  Make navigating post history friendlier and add deep share links.
 // @author       Arka
 // @match        https://piazza.com/class/*
@@ -29,6 +29,12 @@ function addHotkeys() {
         else if (event.shiftKey && (event.keyCode == 39)) navigateHistoryRight();
         else if (event.shiftKey && (event.keyCode == 38)) navigatePostsUp();
         else if (event.shiftKey && (event.keyCode == 40)) navigatePostsDown();
+        else if (event.shiftKey && event.metaKey && (event.keyCode == 85)) togglePostRead();
+        else if (event.shiftKey && event.metaKey && (event.keyCode == 83)) togglePostStarred();
+        else if (event.shiftKey && event.metaKey && (event.keyCode == 69)) togglePostFollowed();
+          // Deliberately making it hard to archive accidentally...
+        else if (event.shiftKey && event.altKey && event.metaKey && (event.keyCode == 88)) archivePost();
+        else if (event.altKey && event.metaKey && (event.keyCode == 88)) unarchivePost();
     };
 }
 
@@ -92,6 +98,49 @@ function navigatePostsDown() {
         newContentId = feedItems[i].id;
     }
     if (newContentId !== null) P.feed.selectContent(newContentId);
+}
+
+function togglePostRead() {
+    if (P.feed.selectedItem.is_new) {
+        // If you manage to trigger this, my hat's off to you. :-)
+        P.feed.markUnread(P.feed.selectedItem.id, true);
+    } else {
+        P.feed.markUnread(P.feed.selectedItem.id);
+    }
+}
+
+function togglePostFollowed() {
+    // Despite the names, P.note_view and P.question_view are synonymous, so either can be used for any post type.  Go figure.
+    if (P.note_view.content.is_bookmarked) {
+        P.feed.toggleFollow(P.note_view.content.id, false);
+    } else {
+        P.feed.toggleFollow(P.note_view.content.id, true);
+    }
+}
+
+function togglePostStarred() {
+    if (P.note_view.content.my_favorite) {
+        PEM.fire("favorite", false);
+    } else {
+        PEM.fire("favorite", true);
+    }
+}
+
+function archivePost() {
+    var currentContentId = P.note_view.content.id;
+    P.feed.delFeedItem(currentContentId);
+}
+
+function unarchivePost() {
+    var currentContentId = P.note_view.content.id;
+    // This is a little dubious - the Piazza addFeedItem method assumes you're looking at the Archived posts filter when you take this action,
+    //   and if you aren't, it throws a JavaScript error.
+    // With the hotkeys you may now be performing this operation on a post you were looking at in another view and just archived by mistake.
+    // So, we'll throw the event ourselves.
+    // We still don't quite get the desired behavior since the item doesn't reappear in the feed until you refresh the page.
+    // But, it's more recoverable in this scenario than the behavior with addFeedItem, so I'll live with it for now.
+    //P.feed.addFeedItem(currentContentId);
+    PA.call_pj("network.add_item", {cid:currentContentId}, $('#' + currentContentId), function(data){});
 }
 
 function addShareLinks(content) {
