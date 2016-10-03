@@ -30,8 +30,8 @@ function addHotkeys() {
         else if (event.shiftKey && (event.keyCode == 38)) navigatePostsUp();
         else if (event.shiftKey && (event.keyCode == 40)) navigatePostsDown();
         else if (event.shiftKey && event.metaKey && (event.keyCode == 85)) togglePostRead();
-        else if (event.shiftKey && event.metaKey && (event.keyCode == 84)) togglePostTracked();
         else if (event.shiftKey && event.metaKey && (event.keyCode == 83)) togglePostStarred();
+        else if (event.shiftKey && event.metaKey && (event.keyCode == 69)) togglePostFollowed();
           // Deliberately making it hard to archive accidentally...
         else if (event.shiftKey && event.altKey && event.metaKey && (event.keyCode == 88)) archivePost();
         else if (event.altKey && event.metaKey && (event.keyCode == 88)) unarchivePost();
@@ -109,7 +109,7 @@ function togglePostRead() {
     }
 }
 
-function togglePostTracked() {
+function togglePostFollowed() {
     // Despite the names, P.note_view and P.question_view are synonymous, so either can be used for any post type.  Go figure.
     if (P.note_view.content.is_bookmarked) {
         P.feed.toggleFollow(P.note_view.content.id, false);

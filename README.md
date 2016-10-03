@@ -16,7 +16,7 @@ Hotkeys and links to make catching up on Piazza posts easier.
 - Shift+meta+X: unarchive thread.
 - Shift+meta+alt+X: archive thread.
 - Shift+meta+S: star thread.
-- Shift+meta+T: start/stop tracking (receiving e-mails for) the thread.
+- Shift+meta+E: start or stop receiving e-mails for the thread.
 
 ## Known issues
 
