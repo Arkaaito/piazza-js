@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Piazza Themes
 // @namespace    http://scion-interactive.com/
-// @version      0.1
+// @version      1.0
 // @description  Customize Piazza colors and menu contents.
 //               To theme your classes:
 //               1. Pull open the class in your web browser.
