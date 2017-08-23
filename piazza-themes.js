@@ -67,7 +67,7 @@ function addTheme(themeName, settings) {
     }
 
     addGlobalStyle(themeName, '#page_main .main_panel, .post_type_box.active { background: '+settings.bg_color+' !important; }');
-    addGlobalStyle(themeName, 'a, li.classDropdownItem { color: '+settings.link_color+' !important; }');
+    addGlobalStyle(themeName, 'a:not(.UIButton), li.classDropdownItem { color: '+settings.link_color+' !important; }');
     addGlobalStyle(themeName, '.btn-primary { background: '+settings.button_color+' !important; background: -khtml-gradient(linear, left top, left bottom, from('+settings.button_gradient+'), to('+settings.button_color+')) !important; background: -webkit-gradient(linear, left top, left bottom, from('+settings.button_gradient+'), to('+settings.button_color+')) !important; background: -webkit-linear-gradient(top, '+settings.button_gradient+' 0%, '+settings.button_gradient+' 100%) !important; background: -moz-linear-gradient(center top, '+settings.button_color+', '+settings.button_gradient+') !important; background: -ms-linear-gradient(top, '+settings.button_gradient+' 0%, '+settings.button_gradient+' 100%) !important; background: -o-linear-gradient(top, '+settings.button_gradient+' 0%, '+settings.button_gradient+' 100%) !important; background: linear-gradient(top, '+settings.button_gradient+' 0%, '+settings.button_gradient+' 100%) !important; }');
     addGlobalStyle(themeName, '#classes_brand { '+settings.logo_info+'}');
     addGlobalStyle(themeName, '#top_bar.top_bar .navbar-inner, #top_bar.top_bar .nav.dark_nav { background: '+settings.nav_bar_color+' !important; }');
